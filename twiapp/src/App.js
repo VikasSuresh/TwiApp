@@ -3,6 +3,9 @@ import axios from 'axios';
 
 const server='http://localhost:1000/';
 class App extends React.Component{
+  state={
+    
+  }
   componentDidMount(){       
     axios.get(server+'movies')      
       .then(({data})=>console.log(data));
@@ -14,8 +17,7 @@ class App extends React.Component{
   
   render(){
     return(
-      <h1>Hi</h1>
-      
+      <h1>Hi</h1>      
     )
   }
 }
