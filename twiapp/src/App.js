@@ -1,25 +1,23 @@
-import React from 'react';
-import axios from 'axios';
+import React, {Component} from 'react';
+import {Switch,Route} from 'react-router-dom'
 
-const server='http://localhost:1000/';
-class App extends React.Component{
-  state={
-    
-  }
-  componentDidMount(){       
-    axios.get(server+'movies')      
-      .then(({data})=>console.log(data));
-    axios.get(server+'actors')      
-      .then(({data})=>console.log(data));
-    axios.get(server+'producers')      
-      .then(({data})=>console.log(data));
-  };
-  
-  render(){
-    return(
-      <h1>Hi</h1>      
+import Home from "./containers/Home/Home";
+import Movie from "./containers/Movie/Movie";
+import Add from "./containers/Add/Add";
+class App extends Component{
+  render(){    
+    return (
+      <div className='container-fluid'>
+        <Switch>          
+          <Route path='/update/:id'/>
+          <Route path="/addMovie" component={Add}/>
+          <Route path="/:id" component={Movie}/>
+          <Route path="/" component={Home}/>
+        </Switch>
+      </div>
     )
   }
 }
+
 
 export default App;

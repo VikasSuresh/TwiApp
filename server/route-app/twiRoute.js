@@ -23,9 +23,11 @@ router.get('/producers',async(req,res)=>{
     res.send(result);
 })
 
-router.get('/movies/:_id',async(req,res)=>{
-    let result =await movies.find({_id:req.params._id})
-    res.send(result);
+router.get('/movies/:_id',(req,res)=>{
+    movies.findById(req.params._id)
+    .then(result=>res.send(result))
+    .catch(({err})=>{res.send(err)})
+    
 })
 
 router.get('/actors/:_id',async(req,res)=>{
@@ -38,5 +40,38 @@ router.get('/producers/:_id',async(req,res)=>{
     res.send(result);
 })
 
+router.post('/movies/addMovie',(req,res)=>{                
+    let result =new movies({
+        Name:req.body.Name,
+        YOR:req.body.YOR,
+        Plot:req.body.Plot,
+        Producers:req.body.Producers,
+        Actors:req.body.Actors
+    })
+    result.save().then((data)=>res.send(data))
+        .catch(data=>console.log(data))
+});
+
+router.post('/actors/addActor',(req,res)=>{      
+    let result =new actors({
+        Name:req.body.Name,
+        DOB:req.body.DOB,
+        Gender:req.body.Plot,
+        Bio:req.body.Producers        
+    })
+    result.save().then((data)=>res.send(data))
+        .catch(data=>console.log(data))
+});
+
+router.post('/producers/addProducer',(req,res)=>{          
+    let result =new producers({
+        Name:req.body.Name,
+        DOB:req.body.DOB,
+        Gender:req.body.Plot,
+        Bio:req.body.Producers        
+    })
+    result.save().then((data)=>res.send(data))
+        .catch(data=>console.log(data))
+});
 
 exports.twiRoute=router;
