@@ -17,6 +17,20 @@ class Movie extends Component{
             })
         }
     }
+    Edit(){
+        $('.edit').show()
+        document.querySelectorAll('.view').hide()
+    }
+    Del(){
+        console.log('Del')
+    }
+    Save(){
+        console.log('Save')
+    }
+    Cancel(){
+        document.querySelectorAll('.view').show()
+        document.querySelectorAll('.view').hide()
+    }
     render(){
         let movie='Loading';           
         if(this.props.movie===""){
@@ -31,13 +45,22 @@ class Movie extends Component{
             movie=this.props.movie;            
             return(<div>            
             <div><img src={movie.Poster} alt={movie.Name} height="100" width="100"/></div>
-            <div>{movie.Name}</div>
-            <div>{movie.YOR}</div>
-            <div>{movie.Plot}</div>
+            <div className='view'>{movie.Name}</div>
+            <div className='edit'>{movie.Name}</div>
+            <div className='view'>{movie.YOR}</div>
+            <div className='edit'>{movie.YOR}</div>
+            <div className='view'>{movie.Plot}</div>
+            <div className='edit'>{movie.Plot}</div>
             <div>{movie.Actors}</div>
-            <form>     
-                           
-            </form>
+            <div>{movie.Producers}</div>
+            <div className='edit'>
+                <button onClick={this.Save}>Save</button>
+                <button onClick={this.Cancel}>Cancel</button>
+            </div>
+            <div>
+            <button  onClick={this.Edit}>Edit</button> 
+            <button  onClick={this.Del}>Delete</button>
+            </div>            
             </div>
                 )        
         }

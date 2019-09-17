@@ -40,11 +40,17 @@ router.get('/producers/:_id',async(req,res)=>{
     res.send(result);
 })
 
-router.post('/movies/addMovie',(req,res)=>{                
+router.post('/movies/addMovie',(req,res)=>{                    
+
+    let {Poster}=req.files;
+    Poster.mv(`public/img/${Poster.name}`,({err})=>{
+        console.log(err);
+    })
     let result =new movies({
         Name:req.body.Name,
         YOR:req.body.YOR,
         Plot:req.body.Plot,
+        Poster:'img/'+Poster.name,
         Producers:req.body.Producers,
         Actors:req.body.Actors
     })
