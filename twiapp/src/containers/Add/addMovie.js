@@ -8,7 +8,8 @@ import * as selectors from '../../store/reducers/MovieReducer'
 class AddMovie extends Component{
     state={
         isFetched:false,
-        data:new FormData()
+        data:new FormData(),
+        temp:[]
     }
     componentDidMount(){
         this.props.getActors();
@@ -27,9 +28,12 @@ class AddMovie extends Component{
         this.state.data.append('Plot',this.Plot.value);
         this.state.data.append('Poster',this.Poster.files[0]);
         this.state.data.append('Producers',this.Producers.value);
-        this.state.data.append('Actors',this.Actors.value);
-
+        this.state.data.append('Actors',this.state.temp);
         this.props.addMovie(this.state.data)
+    }
+    handleChange(e){
+        let value=e.target.value
+        this.state.temp.push(value)        
     }
     render(){        
         if(this.state.isFetched===true){
@@ -63,7 +67,7 @@ class AddMovie extends Component{
         </div>
         <div>
         <label>Actors:-</label>                
-        <select multiple name='Actors'ref={ref=>this.Actors=ref} >          
+        <select multiple name='Actors' onChange={this.handleChange.bind(this)} >          
         {this.props.actors.map((actor,i)=>(
             <option key={i} value={actor._id}>{actor.Name}</option>            
         ))} 

@@ -35,7 +35,7 @@ class Home extends Component{
             <br />               
             <div className='row'>
                 <div className="col-md-4"></div>
-                <div className="col-md-6" id='addMovie'>
+                <div className="col-md-4" id='addMovie'>
                     <form action="/addMovie">
                         <input type="submit" value="Add Movie" />
                     </form>
