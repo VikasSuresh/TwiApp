@@ -1,9 +1,10 @@
 import React,{ Component } from "react";
 import { connect } from "react-redux";
 import { getAllMovies } from '../../store/actions/MovieActions';
-import Show from "../../components/DisplayMovie";
 import * as selectors from "../../store/reducers/MovieReducer";
-import './Home.css';
+import Show from "../../components/Home/Show";
+import HomeRender from '../../components/Home/Home';
+
 class Home extends Component{
     state={
         allMovies:[],
@@ -25,32 +26,15 @@ class Home extends Component{
         if(this.state.isFetched){                        
             allMovies=allMovies.map(movie=>(
             <Show movie={movie} key={movie._id}/>                          
-            ));        
+            ));                
+            return(        
+                <HomeRender allMovies={allMovies}/>
+                )
         }else{
             allMovies=<div>Loading</div>
+            return(<div>{allMovies}</div>)
         }
         
-        return(
-            <div className="container">
-            <br />               
-            <div className='row'>
-                <div className="col-md-4"></div>
-                <div className="col-md-4" id='addMovie'>
-                    <form action="/addMovie">
-                        <input type="submit" value="Add Movie" />
-                    </form>
-                </div>                
-            </div>         
-            <div className='row'>
-                <div className="col-md-4"></div>
-                <div className="jumbotron">
-                    <div className="col-md-12" id='display'>
-                        {allMovies}                                                
-                    </div>
-                </div>
-            </div>
-        </div>   
-        )
     }
 }
 

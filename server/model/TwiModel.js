@@ -15,8 +15,7 @@ const actorSchema = new mongoose.Schema({
     Name:String,
     DOB:Date,
     Gender:String,
-    Bio:String,
-    Movies:[String]
+    Bio:String,    
 });
 
 const actors=mongoose.model('Actor',actorSchema);
@@ -25,8 +24,7 @@ const producerSchema = new mongoose.Schema({
     Name:String,
     DOB:Date,
     Gender:String,
-    Bio:String,
-    Movies:[String]
+    Bio:String,    
 });
 
 const producers=mongoose.model('Producer',producerSchema);

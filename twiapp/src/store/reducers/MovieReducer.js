@@ -4,8 +4,8 @@ const initialstate={
  allMovies:[],
  movie:{},
  actors:[],
- producers:[]
-
+ producers:[],
+ MBON:[]
 };
 
 const reducer=(state=initialstate,action)=>{
@@ -30,6 +30,11 @@ const reducer=(state=initialstate,action)=>{
             ...state,
             producers:action.producers,            
         }   
+        case actionTypes.GET_MBON:
+            return{
+                ...state,
+                MBON:action.MBON
+            }
         default:
             return state;
 
@@ -42,3 +47,4 @@ export const getMovies=(state)=>state.MovieReducer.allMovies;
 export const getMovie=(state)=>state.MovieReducer.movie;
 export const getActors=(state)=>state.MovieReducer.actors;
 export const getProducers=(state)=>state.MovieReducer.producers;
+export const getMBON=(state)=>state.MovieReducer.MBON;

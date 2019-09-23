@@ -34,3 +34,15 @@ export const addMovie=(movie)=>{
     }
 }
 
+export const getMoviesBasedOnName=(name)=>{
+    console.log(name)
+    return dispatch=>{
+        axios.get('http://localhost:1000/search/'+name)
+        .then(({data})=>{            
+            dispatch({
+                type:actionTypes.GET_MBON,
+                MBON:data
+            })
+        })
+    }
+}

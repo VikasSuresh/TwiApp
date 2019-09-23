@@ -7,6 +7,8 @@ import { getActors,getProducers } from "../../store/actions/ActorsAndProducers";
 import $ from'jquery';
 import './Movie.css'
 import Axios from "axios";
+import MovieRender from "../../components/Movie/Movie";
+import ModalMovie from "../../components/Movie/MovieModal";
 
 class Movie extends Component{
     state={
@@ -41,16 +43,10 @@ class Movie extends Component{
                     actors:this.props.actors.filter((a)=>this.props.movie.Actors.includes(a._id)),
                     producers:this.props.producers.filter((a)=>a._id===this.props.movie.Producers)
                 })
-            },1000)
-            
+            },500)            
         }                    
     }
-    
-    
-    Edit(){
-        $('.edit').show();
-        $('.view').hide();
-    }
+            
     Del(){
         $.ajax('http://localhost:1000/delete',
         {
@@ -75,11 +71,7 @@ class Movie extends Component{
             document.location.reload()
         )           
         
-    }
-    Cancel(){
-        $('.view').show();
-        $('.edit').hide();
-    }
+    }   
     render(){           
         let movie='Loading';           
         if(this.props.movie===""){
@@ -90,62 +82,14 @@ class Movie extends Component{
                 </div>   
             )
         }
-        else if (this.state.isFetched && this.state.actors.length!==0 && this.state.producers.length!==0 ) {
-            movie=this.state.movie;                 
-            let actors=this.state.actors            
-            let producers=this.state.producers              
-            return(<div>            
-            <div className='view'><img src={movie.Poster} alt={movie.Name} height="100" width="100"/></div>
-            <div className='view'>{movie.Name}</div>
-            <div className='view'>{movie.YOR}</div>
-            <div className='view'>{movie.Plot}</div>
-            <div>{actors.map(m=>(                
-                <div className='view' key={m._id}>{m.Name}</div>                                
-            ))}</div>            
-            <div className='view'>{producers.map(m=>(
-                <div key ={m._id}>{m.Name}</div>
-            ))}</div>
-            
-            <div className='edit'>
-                <input type='file' id='img'  />
-            </div>
-            <div className='edit'>
-            <input type='text' defaultValue={movie.Name} name='Name' id='Name' />
-            </div>
-
-            <div className='edit'>
-            <input type='text' defaultValue={movie.YOR} name='YOR' id='YOR' />
-            </div>
-            
-            <div className='edit'>
-            <input type='text' defaultValue={movie.Plot} name='Plot' id='Plot' />
-            </div>
-            
-            <div className='edit'>
-                <select id='actors' multiple={true} defaultValue={actors.map(m=>m._id)} >
-                {this.props.actors.map(m=>(
-                    <option key={m._id} value={m._id}  >{m.Name}</option>                    
-                ))}
-                </select>
-            </div>
-            <div className='edit'>
-            <select id='producers' defaultValue={producers.map(m=>m._id)[0]}>
-            {this.props.producers.map(m=>(                
-                <option key ={m._id} value={m._id} >{m.Name}</option>                
-            ))}
-            </select>
-            </div>
-            <div className='edit'>
-                <button id='save' value={this.state.movie._id} onClick={this.Save}>Save</button> 
-                <button onClick={this.Cancel}>Cancel</button>
-            </div>
-            <div>
-            <button  onClick={this.Edit}>Edit</button> 
-            <button id='del' value={this.state.movie._id} onClick={this.Del}>Delete</button>
-            </div>            
-            </div>
-                )        
-        }
+        else if ( this.state.actors.length!==0 && this.state.producers.length!==0 ) {                     
+            // this.state.actors=this.props.actors.filter((a)=>this.props.movie.Actors.includes(a._id))
+            // this.state.producers=this.props.producers.filter((a)=>a._id===this.props.movie.Producers)            
+            return(<div>                   
+                <MovieRender state={this.state} del={this.Del} />   
+                <ModalMovie props={this.props} state={this.state} save={this.Save} />     
+                </div>       
+            )}
         else{
             return(
             <div>

@@ -1,4 +1,6 @@
 const express = require('express');
+const {MovieValidate,Validate}=require('../validate')
+
 const router=express.Router(
     {mergeParams:true}
 );
@@ -40,43 +42,54 @@ router.get('/producers/:_id',async(req,res)=>{
     res.send(result);
 })
 
-router.post('/movies/addMovie',(req,res)=>{                                    
-    let {Poster}=req.files;    
-    Poster.mv(`public/img/${Poster.name}`,(err)=>{
+router.post('/movies/addMovie',async(req,res)=>{                                    
+    let {error}=MovieValidate(req.body);    
+    if(!error){
+        let {Poster}=req.files;    
+        Poster.mv(`public/img/${Poster.name}`,(err)=>{
         console.log(err);             
-    });
-    let result =new movies({
-        Name:req.body.Name,
-        YOR:req.body.YOR,
-        Plot:req.body.Plot,
-        Poster:'img/'+Poster.name,
-        Producers:req.body.Producers,
-        Actors:req.body.Actors.split(',')
-    })    
-    result.save().then((data)=>res.send(data))
-        .catch(data=>console.log(data))
+        });
+        let result =new movies({
+            Name:req.body.Name,
+            YOR:req.body.YOR,
+            Plot:req.body.Plot,
+            Poster:'img/'+Poster.name,
+            Producers:req.body.Producers,
+            Actors:req.body.Actors.split(',')
+        })    
+        result.save().then((data)=>res.send(data))
+            .catch(data=>console.log(data))
+    }
 });
 
 router.post('/actors/addActor',(req,res)=>{      
-    let result =new actors({
-        Name:req.body.Name,
-        DOB:req.body.DOB,
-        Gender:req.body.Gender,
-        Bio:req.body.Bio        
-    })
-    result.save().then((data)=>res.send(data))
-        .catch(data=>console.log(data))
+    let {error}=Validate(req.body);    
+    if(!error){
+        let result =new actors({
+            Name:req.body.Name,
+            DOB:req.body.DOB,
+            Gender:req.body.Gender,
+            Bio:req.body.Bio        
+        })        
+        result.save().then((data)=>res.send(data))
+            .catch(data=>console.log(data))
+    }
 });
 
 router.post('/producers/addProducer',(req,res)=>{          
-    let result =new producers({
-        Name:req.body.Name,
-        DOB:req.body.DOB,
-        Gender:req.body.Gender,
-        Bio:req.body.Bio        
-    })
-    result.save().then((data)=>res.send(data))
-        .catch(data=>console.log(data))
+    let {error}=Validate(req.body);    
+    if(!error){
+        let result =new producers({
+            Name:req.body.Name,
+            DOB:req.body.DOB,
+            Gender:req.body.Gender,
+            Bio:req.body.Bio        
+        })        
+        
+        result.save().then((data)=>res.send(data))
+            .catch(data=>console.log(data))    
+    }
+    
 });
 
 
@@ -114,4 +127,11 @@ router.delete('/delete',(req,res)=>{
     movies.remove({_id:req.body._id}).then(res.send('success')).catch(err=>res.send(err))
 })
 
+router.get('/search/:name',(req,res)=>{
+    let regex= new RegExp('^'+req.params.name)    
+    movies.find({Name:regex})
+    .then(data=>{
+        res.send(data)
+    })
+})
 exports.twiRoute=router;

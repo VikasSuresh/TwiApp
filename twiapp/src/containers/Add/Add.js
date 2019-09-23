@@ -5,10 +5,11 @@ import AddProducer from './AddProducer';
 class Add extends Component{
     render(){
         return(
-            <div>            
-            <AddActors/>
-            <AddProducer/>            
-            <AddMovie/>
+            <div className='row'>            
+            <AddActors/>                  
+            <AddProducer/>       
+            <AddMovie/> 
+                  
             </div>
         )
     }

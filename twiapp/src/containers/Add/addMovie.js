@@ -2,14 +2,16 @@ import React,{ Component } from "react";
 import {connect} from "react-redux";
 import { getActors,getProducers } from "../../store/actions/ActorsAndProducers";
 import { addMovie } from "../../store/actions/MovieActions";
-import * as selectors from '../../store/reducers/MovieReducer'
+import * as selectors from '../../store/reducers/MovieReducer';
+// import AddMovieRender from "../../components/AddMovie";
+import '../../components/AddMovie.css'
 
 
 class AddMovie extends Component{
     state={
         isFetched:false,
         data:new FormData(),
-        temp:[]
+        temp:[],              
     }
     componentDidMount(){
         this.props.getActors();
@@ -22,62 +24,96 @@ class AddMovie extends Component{
             })
         }
     }    
-    submit(e){               
+    submit(e){                       
         this.state.data.append('Name',this.Name.value);
-        this.state.data.append('YOR',this.YOR.value);
+        this.state.data.append('YOR',this.Date.value);
         this.state.data.append('Plot',this.Plot.value);
         this.state.data.append('Poster',this.Poster.files[0]);
         this.state.data.append('Producers',this.Producers.value);
-        this.state.data.append('Actors',this.state.temp);
+        this.state.data.append('Actors',this.state.temp);                
         this.props.addMovie(this.state.data)
     }
-    handleChange(e){
-        let value=e.target.value
-        this.state.temp.push(value)        
+    
+    handleChange(e){            
+        let value=e.target.value;
+        if(!this.state.temp.includes(value)){
+            this.state.temp.push(value)                      
+        }
+        
     }
     render(){        
-        if(this.state.isFetched===true){
-        return(
-        <div>
-        <form action='/'  onSubmit={this.submit.bind(this)}>
-        <div>
-        <label>Name :-</label>              
-        <input type='text' name='Name'ref={ref=>this.Name=ref} />    
+        if(this.state.isFetched===true){            
+        return(            
+            <div className='container'>
+            <div className='row'>
+                <div className='col-sm-4'>
+                    <div id="demo" className="carousel slide" data-ride="carousel">
+                        <ul className="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" className="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                        </ul>
+                        
+                        <div className='carousel-inner'>
+                            <div className='carousel-item active'>
+                                <img src='/img/Carousel-1.jpeg' alt='img'  height='25%' />
+                            </div>
+                            <div className='carousel-item'>
+                                <img src='/img/Carousel-2.jpg' alt='img'  height='25%' />
+                            </div>
+                            <div className='carousel-item'>
+                                <img src='/img/Carousel-3.jpg' alt='img' height='25%' />
+                            </div>
+                        </div>
+    
+                        <a className='carousel-control-prev' href="#demo" data-slide="prev">
+                            <span className="carousel-control-prev-icon"></span>
+                        </a>
+    
+                        <a className='carousel-control-next' href="#demo" data-slide="next">
+                            <span className="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+    
+                <div className='col-sm-6 MovieForm'>
+                <form action='/' onSubmit={this.submit.bind(this)}>                                            
+                    <div>
+                        <input type='text' name='Name' id='nameInput' className='form-control' placeholder="Name" ref={ref=>this.Name=ref} />                        
+                    </div>                                                                     
+                    <div>
+                        <input type='date' name='YOR' id='dateInput' className='form-control' placeholder="Date" ref={ref=>this.Date=ref}/>                    
+                    </div>           
+                    <div>
+                        <textarea name='Plot' id='plotTextArea' className='form-control' placeholder='Plot' ref={ref=>this.Plot=ref} />                    
+                    </div>      
+                    <div>
+                        <input type='file' name='Poster' id='uploadInput' className='form-control' ref={ref=>this.Poster=ref} />
+                        <label></label>    
+                    </div>                      
+                    <label>Actors</label>
+                    <select multiple={true} onChange={this.handleChange.bind(this)} name='Actors' className="browser-default custom-select mb-4">
+                        <option disabled>Choose Actors</option>                   
+                        {this.props.actors.map((a,i)=>(
+                            <option key={i} value={a._id}>{a.Name}</option>
+                        ))}
+                    </select>
+                    <label>Producers</label>
+                    <select className="browser-default custom-select mb-4" name='Producers' ref={ref=>this.Producers=ref} defaultValue={'Default'} >
+                        <option value='Default' disabled={true}>Choose Producers</option>
+                        {this.props.producers.map((p,i)=>(
+                            <option key={i} value={p._id}>{p.Name}</option>
+                        ))}
+                    </select>
+                    <div>
+                        <button className="btn btn-info btn-lg" type="submit">Send</button>
+                    </div>
+                </form>
+                </div>
+    
+            </div>          
         </div>
-        <div>
-        <label>YOR :-</label>        
-        <input type='date' name='YOR'ref={ref=>this.YOR=ref} /> 
-        </div>       
-        <div>
-        <label>Plot :-</label>        
-        <input type='text' name='Plot' ref={ref=>this.Plot=ref} />    
-        </div>
-        <div>
-        <label>Upload Image</label>
-        <input type='file' ref={(ref)=>{this.Poster=ref}} name='Poster' ></input>
-        </div>
-        <div>
-        <label>Producer:-</label>                        
-        <select name='Producers' ref={ref=>this.Producers=ref} >            
-        <option value='' >-</option>  
-        {this.props.producers.map((prod,i)=>(
-            <option key={i} value={prod._id}>{prod.Name}</option>            
-        ))}        
-        </select>        
-        </div>
-        <div>
-        <label>Actors:-</label>                
-        <select multiple name='Actors' onChange={this.handleChange.bind(this)} >          
-        {this.props.actors.map((actor,i)=>(
-            <option key={i} value={actor._id}>{actor.Name}</option>            
-        ))} 
-        </select>  
-        </div>
-        <div>
-        <button type='submit'>submit</button>
-        </div>
-        </form>    
-        </div>
+        
         )}
         else{
             return(<div>Loading</div>)

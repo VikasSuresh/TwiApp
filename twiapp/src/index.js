@@ -7,12 +7,11 @@ import thunk from "redux-thunk";
 import { createStore,applyMiddleware,combineReducers } from "redux"; 
 import MovieReducer from './store/reducers/MovieReducer'; 
 import logger  from "redux-logger";
-import promise  from "redux-promise";
 
 const TwiReducer=combineReducers({
 MovieReducer
 });
-const middleware=[promise,thunk]
+const middleware=[thunk]
 if(process.env.NODE_env !=='Production'){
     middleware.push(logger);
 }

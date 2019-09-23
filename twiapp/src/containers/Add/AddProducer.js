@@ -1,5 +1,7 @@
 import React,{ Component } from "react";
 import axios from 'axios';
+import './AddProducer.css'
+
 
 class Producers extends Component{
     state={
@@ -26,7 +28,7 @@ class Producers extends Component{
         })
     }
     render(){
-        return(<div>
+        return(<div className='col-sm-8 Producer'  >
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#ProducerModal">
                 Add Producer
             </button>
@@ -41,22 +43,18 @@ class Producers extends Component{
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div className="modal-body">
-                
-                <div><label>Name:-</label>
-                <input type='text' name='Name' onChange={this.handleInuptChange.bind(this)} />
-                </div>
+            <div className="modal-body">                
                 <div>
-                <label>DOB:-</label>
-                <input type='date' name='DOB'onChange={this.handleInuptChange.bind(this)} />
+                <input type='text' name='Name' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Name'/>
                 </div>
-                <div>
-                <label>Gender:-</label>
-                <input type='text' name='Gender' onChange={this.handleInuptChange.bind(this)} />
+                <div>                
+                <input type='date' name='DOB'className='form-control' onChange={this.handleInuptChange.bind(this)}/>
                 </div>
-                <div>
-                <label>Bio:-</label>
-                <input type='text' name='Bio' onChange={this.handleInuptChange.bind(this)} />
+                <div>                
+                <input type='text' name='Gender' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Gender'/>
+                </div>
+                <div>                
+                <textarea type='text' name='Bio' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Bio' />
                 </div>
             </div>
             <div className="modal-footer">
