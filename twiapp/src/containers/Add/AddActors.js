@@ -8,7 +8,7 @@ class Actors extends Component{
     }
     handleInuptChange(e){
         const field=e.target.name;
-        const value=e.target.value;        
+        const value=e.target.value;                
         this.setState(prevState=>{
             return{
                 ...prevState,
@@ -17,8 +17,8 @@ class Actors extends Component{
                     [field]:value
                 }
             }
-        })
-    }
+        })                               
+    }    
     submit(e){
         e.preventDefault();
         axios.post('http://localhost:1000/actors/addActor',this.state.actor)
@@ -58,7 +58,7 @@ class Actors extends Component{
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" className="btn btn-primary">Save changes</button>
+                <button type="submit" disabled={true} className="btn btn-primary">Save changes</button>
             </div>
             </div>
             </form>

@@ -56,7 +56,7 @@ class Movie extends Component{
                 window.location.replace("/")            
             }                        
         })
-    }
+    }    
     Save(){
         let data=new FormData();
         data.append('_id',$('#save').val())
