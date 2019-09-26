@@ -50,7 +50,8 @@ class Producers extends Component{
                 <div>                
                 <input type='date' name='DOB'className='form-control' onChange={this.handleInuptChange.bind(this)}/>
                 </div>
-                <div>                
+                <div>               
+                Enter M OR F for Gender 
                 <input type='text' name='Gender' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Gender'/>
                 </div>
                 <div>                

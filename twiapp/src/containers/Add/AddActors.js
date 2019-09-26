@@ -49,7 +49,8 @@ class Actors extends Component{
                 <div>                
                 <input type='date' name='DOB'className='form-control' onChange={this.handleInuptChange.bind(this)}/>
                 </div>
-                <div>                
+                <div>   
+                    Enter M OR F for Gender
                 <input type='text' name='Gender' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Gender'/>
                 </div>
                 <div>                
@@ -58,7 +59,7 @@ class Actors extends Component{
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" disabled={true} className="btn btn-primary">Save changes</button>
+                <button type="submit" className="btn btn-primary">Save changes</button>
             </div>
             </div>
             </form>

@@ -30,7 +30,7 @@ class AddMovie extends Component{
         this.state.data.append('Plot',this.Plot.value);
         this.state.data.append('Poster',this.Poster.files[0]);
         this.state.data.append('Producers',this.Producers.value);
-        this.state.data.append('Actors',this.state.temp);                
+        this.state.data.append('Actors',[...new Set(this.state.temp)]);                
         this.props.addMovie(this.state.data)
     }
     
@@ -42,9 +42,9 @@ class AddMovie extends Component{
     }
     
     }
-    handleActorChange(e){                    
-        let i=e.target.options.selectedIndex;                          
-        this.state.temp.push(this.props.actors[i]._id)               
+    handleActorChange(e){                                              
+        this.state.temp.push(e.target.value) 
+        console.log()              
     }
     render(){        
         if(this.state.isFetched===true){            
