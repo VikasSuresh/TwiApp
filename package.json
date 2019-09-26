@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd server && nodemon server.js\" \"cd twiapp && npm start\""
+    "start": "concurrently \"cd server && node server.js\" \"cd twiapp && npm start\""
   },
   "keywords": [],
   "author": "",
