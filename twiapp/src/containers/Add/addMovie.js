@@ -43,8 +43,7 @@ class AddMovie extends Component{
     
     }
     handleActorChange(e){                                              
-        this.state.temp.push(e.target.value) 
-        console.log()              
+        this.state.temp.push(e.target.value)         
     }
     render(){        
         if(this.state.isFetched===true){            
