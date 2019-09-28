@@ -17,6 +17,7 @@ if(process.env.NODE_ENV==='production'){
     })
 }
 
+console.log(path.resolve(__dirname,'twiapp','build','index.html'))
 const port = process.env.PORT || 1000;
 
 app.listen(port,()=>{    
