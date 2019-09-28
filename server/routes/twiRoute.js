@@ -40,7 +40,8 @@ router.get('/producers/:_id',async(req,res)=>{
 })
 
 router.post('/movies/addMovie',async(req,res)=>{                                    
-    let {error}=MovieValidate(req.body);    
+    let {error}=MovieValidate(req.body);
+    console.log(error)    
     if(!error){
         let {Poster}=req.files;    
         Poster.mv(`public/img/${Poster.name}`,(err)=>{
