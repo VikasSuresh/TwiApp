@@ -2,7 +2,7 @@ import * as actionTypes from './ActionTypes'
 import  axios from "axios";
 export const getActors=()=>{
     return dispatch=>{
-        axios.get('http://localhost:1000/actors')
+        axios.get('/api/actors')
             .then(({data})=>{
                 dispatch({
                     type:actionTypes.GET_ALL_ACTORS,
@@ -14,7 +14,7 @@ export const getActors=()=>{
 
 export const getProducers=()=>{
     return dispatch=>{
-        axios.get('http://localhost:1000/producers')
+        axios.get('/api/producers')
             .then(({data})=>{
                 dispatch({
                     type:actionTypes.GET_ALL_PRODUCERS,
@@ -24,10 +24,3 @@ export const getProducers=()=>{
     }
 }
 
-// export const addActor=(actor)=>{
-//     console.log(actor,'a')
-//     return dispatch=>{
-//         axios.post('http://localhost:1000/actors/addActor',actor)
-//         .catch(data=>console.log(data))
-//     }
-// }

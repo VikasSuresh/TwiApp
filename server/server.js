@@ -3,7 +3,7 @@ const app =express();
 const cors= require('cors');
 const path=require('path');
 const fileupload=require('express-fileupload');
-const {twiRoute}=require('./route-app/twiRoute');
+const {twiRoute}=require('./routes/twiRoute');
 const helmet=require('helmet');
 const compression=require('compression');
 
@@ -17,7 +17,9 @@ app.use(fileupload());
 app.use('/img',express.static(path.join(__dirname,'public/img')));
 
 
-app.use('/',twiRoute);
+app.use('/api',twiRoute);
+
+
 app.listen('1000',()=>{    
     console.log('Listening');    
 })

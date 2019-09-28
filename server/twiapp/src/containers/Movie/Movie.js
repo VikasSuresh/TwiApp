@@ -48,7 +48,7 @@ class Movie extends Component{
     }
             
     Del(){
-        $.ajax('http://localhost:1000/delete',
+        $.ajax('/api/delete',
         {
             method:'Delete',
             data:{_id:$('#del').val()},
@@ -67,7 +67,7 @@ class Movie extends Component{
         data.append('Producers',$('#producers').val())
         data.append('Poster',$('#img')[0].files[0])
             
-        Axios.put('http://localhost:1000/update',data).then(
+        Axios.put('/api/update',data).then(
             document.location.reload()
         )           
         

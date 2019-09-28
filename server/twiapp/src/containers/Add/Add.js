@@ -8,8 +8,7 @@ class Add extends Component{
             <div className='row'>            
             <AddActors/>                  
             <AddProducer/>       
-            <AddMovie/> 
-                  
+            <AddMovie/>                   
             </div>
         )
     }

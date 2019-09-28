@@ -1,62 +1,61 @@
 import React,{ Component } from "react";
+// import {addActor} from '../../store/actions/ActorsAndProducers'
 import axios from 'axios';
-import './AddProducer.css'
-
-
-class Producers extends Component{
+import './AddActors.css'
+class Actors extends Component{
     state={
-        producer:{}
+        actor:{}
     }
     handleInuptChange(e){
         const field=e.target.name;
-        const value=e.target.value;        
+        const value=e.target.value;                
         this.setState(prevState=>{
             return{
                 ...prevState,
-                producer:{
-                    ...prevState.producer,
+                actor:{
+                    ...prevState.actor,
                     [field]:value
                 }
             }
-        })
-    }
+        })                               
+    }    
     submit(e){
-        e.preventDefault();        
-        axios.post('http://localhost:1000/producers/addProducer',this.state.producer)
+        e.preventDefault();
+        axios.post('/api/actors/addActor',this.state.actor)
         .then(()=>{
             document.location.reload();
         })
     }
     render(){
-        return(<div className='col-sm-8 Producer'  >
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#ProducerModal">
-                Add Producer
+        return(<div className='col-sm-4 Actors'>
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#ActorModal">
+                Add Actor
             </button>
 
-        <div className="modal fade" id="ProducerModal" tabIndex="-1" role="dialog" aria-labelledby="ProducerModalLabel" aria-hidden="true">
+        <div className="modal fade" id="ActorModal" tabIndex="-1" role="dialog" aria-labelledby="ActorModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <form onSubmit={this.submit.bind(this)} action='/'>
             <div className="modal-content">
             <div className="modal-header">
-                <h5 className="Producer" id="exampleModalLabel">Producer</h5>
+                <h5 className="Actor" id="exampleModalLabel">Actor</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div className="modal-body">                
+            <div className="modal-body">
                 <div>
                 <input type='text' name='Name' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Name'/>
                 </div>
                 <div>                
                 <input type='date' name='DOB'className='form-control' onChange={this.handleInuptChange.bind(this)}/>
                 </div>
-                <div>               
-                Enter M OR F for Gender 
+                <div>   
+                    Enter M OR F for Gender
                 <input type='text' name='Gender' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Gender'/>
                 </div>
                 <div>                
                 <textarea type='text' name='Bio' className='form-control' onChange={this.handleInuptChange.bind(this)} placeholder='Bio' />
-                </div>
+                </div>              
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -71,4 +70,4 @@ class Producers extends Component{
 }
 
 
-export default Producers;
+export default Actors;

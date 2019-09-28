@@ -2,11 +2,11 @@ import * as actionTypes from './ActionTypes';
 import axios from "axios";
 
 export const getAllMovies=()=>{
-    return dispatch =>{
-        axios.get('http://localhost:1000/movies')    
-        .then(({data})=>{                                    
+    return dispatch =>{        
+        axios.get('/api/movies/')                    
+        .then(({data})=>{                                                
             dispatch(
-                {
+                {   
                     type:actionTypes.GET_ALL_MOVIES,
                     allMovies:data,                    
                 })
@@ -16,7 +16,7 @@ export const getAllMovies=()=>{
 
 export const getAMovie=(movieId)=>{
     return dispatch =>{
-        axios.get('http://localhost:1000/movies/'+movieId)         
+        axios.get('/api/movies/'+movieId)         
         .then(({data})=>{                
                 dispatch({
                     type:actionTypes.GET_MOVIES_ID,
@@ -29,7 +29,7 @@ export const getAMovie=(movieId)=>{
 
 export const addMovie=(movie)=>{                
     return dispatch=>{
-        axios.post('http://localhost:1000/movies/addMovie',movie)
+        axios.post('/api/movies/addMovie',movie)
         .catch(err=>console.log(err))                            
     }
 }
@@ -37,7 +37,7 @@ export const addMovie=(movie)=>{
 export const getMoviesBasedOnName=(name)=>{
     console.log(name)
     return dispatch=>{
-        axios.get('http://localhost:1000/search/'+name)
+        axios.get('/api/search/'+name)
         .then(({data})=>{            
             dispatch({
                 type:actionTypes.GET_MBON,
