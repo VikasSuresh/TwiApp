@@ -19,7 +19,8 @@ app.use('/img',express.static(path.join(__dirname,'public/img')));
 
 app.use('/api',twiRoute);
 
+const port = process.env.PORT || 1000;
 
-app.listen('1000',()=>{    
-    console.log('Listening');    
+app.listen(port,()=>{    
+    console.log('Listening on '+port);    
 })
