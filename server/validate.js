@@ -19,9 +19,8 @@ let schema=Joi.object({
         .max(25)
         .required(),
     DOB:Joi.required(),
-    Gender:Joi.string().pattern(/M|F/i),
-    Bio:Joi.string()
-        .required(),
+    Gender:Joi.string().pattern(/M|F/i).required(),
+    Bio:Joi.string()        
 })
 
 
