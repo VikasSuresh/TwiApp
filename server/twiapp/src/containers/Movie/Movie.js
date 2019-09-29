@@ -9,6 +9,7 @@ import './Movie.css'
 import Axios from "axios";
 import MovieRender from "../../components/Movie/Movie";
 import ModalMovie from "../../components/Movie/MovieModal";
+import { fileUpload } from "../../fileUpload";
 
 class Movie extends Component{
     state={
@@ -46,7 +47,11 @@ class Movie extends Component{
             },500)            
         }                    
     }
-            
+    fileHandle(e){
+        if(e.target.files[0]!==null){
+            fileUpload(e.target.files[0])
+        }
+    }            
     Del(){
         $.ajax('/api/delete',
         {
@@ -65,7 +70,7 @@ class Movie extends Component{
         data.append('Plot',$('#Plot').val())
         data.append('Actors',$('#actors').val())
         data.append('Producers',$('#producers').val())
-        data.append('Poster',$('#img')[0].files[0])
+        data.append('Poster',$('#Poster-url').val())
             
         Axios.put('/api/update',data).then(
             document.location.reload()
@@ -87,7 +92,7 @@ class Movie extends Component{
             // this.state.producers=this.props.producers.filter((a)=>a._id===this.props.movie.Producers)            
             return(<div>                   
                 <MovieRender state={this.state} del={this.Del} />   
-                <ModalMovie props={this.props} state={this.state} save={this.Save} />     
+                <ModalMovie props={this.props} state={this.state} save={this.Save} fileHandle={this.fileHandle.bind(this)} />     
                 </div>       
             )}
         else{

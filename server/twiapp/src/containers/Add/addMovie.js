@@ -5,7 +5,8 @@ import { addMovie } from "../../store/actions/MovieActions";
 import * as selectors from '../../store/reducers/MovieReducer';
 // import AddMovieRender from "../../components/AddMovie";
 import '../../components/AddMovie.css';
-// import {Validate} from "../../validate";
+import {fileUpload} from '../../fileUpload';
+
 
 class AddMovie extends Component{
     state={
@@ -24,18 +25,18 @@ class AddMovie extends Component{
             })
         }
     }        
-    submit(e){                               
+    submit(e){                                       
         this.state.data.append('Name',this.Name.value);
         this.state.data.append('YOR',this.Date.value);
         this.state.data.append('Plot',this.Plot.value);
-        this.state.data.append('Poster',this.Poster.files[0]);
+        this.state.data.append('Poster',this.Poster.value);
         this.state.data.append('Producers',this.Producers.value);
         this.state.data.append('Actors',[...new Set(this.state.temp)]);                
         this.props.addMovie(this.state.data)
     }
     
     handleChange(e){                                                     
-    if(this.Name.value.length!==0 && this.Poster.files[0]!==undefined && this.Date.value.length!==0 && this.state.temp!==[] &&this.Producers.value!=='Default'){                
+    if(this.Name.value.length!==0 && this.Poster.value.length!==0 && this.Date.value.length!==0 && this.state.temp!==[] &&this.Producers.value!=='Default'){                
             document.getElementById('submit').disabled=false;        
     }else{        
         document.getElementById('submit').disabled=true;        
@@ -44,6 +45,11 @@ class AddMovie extends Component{
     }
     handleActorChange(e){                                              
         this.state.temp.push(e.target.value)         
+    }
+    fileChange(e){
+        if(e.target.files[0]!==null){
+            fileUpload(e.target.files[0])
+        }
     }
     render(){        
         if(this.state.isFetched===true){            
@@ -79,9 +85,11 @@ class AddMovie extends Component{
                         </a>
                     </div>
                 </div>
-    
-                <div className='col-sm-6 MovieForm'>
-                    <span id='req'>Fill all the fields </span>
+                <div className='col-sm-6 MovieForm'>                                                       
+                <span id='req'>Fill all the fields </span>
+                <div>
+                    <input onChange={this.fileChange.bind(this)} type='file' name='Poster' className='form-control' />                      
+                </div> 
                 <form action='/' onSubmit={this.submit.bind(this)}>                                                               
                     <div>
                         <input onChange={this.handleChange.bind(this)} type='text' name='Name' id='nameInput' className='form-control' placeholder="Name" ref={ref=>this.Name=ref}/>                        
@@ -92,10 +100,7 @@ class AddMovie extends Component{
                     <div>
                         <textarea name='Plot' id='plotTextArea' className='form-control' placeholder='Plot' ref={ref=>this.Plot=ref} />                    
                     </div>      
-                    <div>
-                        <input onChange={this.handleChange.bind(this)} type='file' name='Poster' id='uploadInput' className='form-control' ref={ref=>this.Poster=ref} />
-                        <label></label>    
-                    </div>                      
+                    <input type='hidden' id='Poster-url' value='' ref={ref=>this.Poster=ref} />
                     <label>Actors</label>
                     <select multiple={true} id='ActorsInput' onChange={this.handleActorChange.bind(this)} name='Actors' className="browser-default custom-select mb-4">
                         <option disabled>Choose Actors</option>                   
@@ -118,7 +123,6 @@ class AddMovie extends Component{
     
             </div>          
         </div>
-        
         )}
         else{
             return(<div>Loading</div>)

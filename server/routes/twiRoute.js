@@ -39,22 +39,21 @@ router.get('/producers/:_id',async(req,res)=>{
     res.send(result);
 })
 
-router.post('/movies/addMovie',async(req,res)=>{                                    
-    let {error}=MovieValidate(req.body);
-    console.log(error)    
+router.post('/movies/addMovie',async(req,res)=>{                                        
+    let {error}=MovieValidate(req.body);    
     if(!error){
-        let {Poster}=req.files;    
-        Poster.mv(`public/img/${Poster.name}`,(err)=>{
-        console.log(err);             
-        });
+        // let {Poster}=req.files;    
+        // Poster.mv(`public/img/${Poster.name}`,(err)=>{
+        // console.log(err);             
+        // });
         let result =new movies({
             Name:req.body.Name,
             YOR:req.body.YOR,
             Plot:req.body.Plot,
-            Poster:'img/'+Poster.name,
+            Poster:req.body.Poster,
             Producers:req.body.Producers,
             Actors:req.body.Actors.split(',')
-        })    
+        })            
         result.save().then((data)=>res.send(data))
             .catch(data=>console.log(data))
     }
@@ -92,33 +91,34 @@ router.post('/producers/addProducer',(req,res)=>{
 
 
 router.put('/update',(req,res)=>{              
-    let  Poster=''    
-    if(req.files!==null){
-        Poster=req.files.Poster
-        Poster.mv(`public/img/${Poster.name}`,(err)=>{
-            console.log(err);             
-        });    
-        result=movies.findById(req.body._id)
-        .then(data=>{
-            data.Name=req.body.Name,
-            data.YOR=req.body.YOR,
-            data.Plot=req.body.Plot,
-            data.Poster='img/'+Poster.name,
-            data.Producers=req.body.Producers,
-            data.Actors=req.body.Actors.split(',')
-            data.save().catch(err=>res.send(err))
-        });
-    }else{
+    // let  Poster=''    
+    // if(req.files!==null){
+    //     Poster=req.files.Poster
+    //     Poster.mv(`public/img/${Poster.name}`,(err)=>{
+    //         console.log(err);             
+    //     });    
+    //     result=movies.findById(req.body._id)
+    //     .then(data=>{
+    //         data.Name=req.body.Name,
+    //         data.YOR=req.body.YOR,
+    //         data.Plot=req.body.Plot,
+    //         data.Poster='img/'+Poster.name,
+    //         data.Producers=req.body.Producers,
+    //         data.Actors=req.body.Actors.split(',')
+    //         data.save().catch(err=>res.send(err))
+    //     });
+    // }else{        
         result=movies.findByIdAndUpdate(req.body._id)
         .then(data=>{
         data.Name=req.body.Name,
         data.YOR=req.body.YOR,
         data.Plot=req.body.Plot,        
+        data.Poster=req.body.Poster.length>0?req.body.Poster:data.Poster,
         data.Producers=req.body.Producers,
         data.Actors=req.body.Actors.split(',')
         data.save().catch(err=>res.send(err))
     })  
-    }                             
+    // }                             
 });
 
 router.delete('/delete',(req,res)=>{    
@@ -132,4 +132,5 @@ router.get('/search/:name',(req,res)=>{
         res.send(data)
     })
 })
+
 exports.twiRoute=router;

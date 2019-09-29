@@ -11,6 +11,10 @@ const MovieModal =(param)=>(
                 </div>
                 <div className="modal-body">                    
                     <div>
+                        <input onChange={param.fileHandle} type='file' name='Poster' id='img' className='form-control' />                        
+                        <input type='hidden' id='Poster-url' value=''/>
+                    </div>  
+                    <div>
                         <input type='text' name='Name' id='Name' className='form-control' placeholder="Name" defaultValue={param.state.movie.Name} />                        
                     </div>                                                                     
                     <div>
@@ -18,10 +22,7 @@ const MovieModal =(param)=>(
                     </div>           
                     <div>
                         <textarea name='Plot' id='Plot' className='form-control' placeholder='Plot' defaultValue={param.state.movie.Plot} />                    
-                    </div>      
-                    <div>
-                        <input type='file' name='Poster' id='img' className='form-control' />                        
-                    </div>                      
+                    </div>                                              
                     <label>Actors</label>
                     <select multiple={true} name='Actors' id='actors' 
                     className="browser-default custom-select mb-4" defaultValue={param.state.actors.map(m=>m._id)} >
