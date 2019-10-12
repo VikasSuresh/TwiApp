@@ -2,6 +2,7 @@ import React,{ Component } from "react";
 // import {addActor} from '../../store/actions/ActorsAndProducers'
 import axios from 'axios';
 import './AddActors.css'
+const API=process.env.REACT_APP_API
 class Actors extends Component{
     state={
         actor:{}
@@ -21,7 +22,7 @@ class Actors extends Component{
     }    
     submit(e){
         e.preventDefault();
-        axios.post('/api/actors/addActor',this.state.actor)
+        axios.post(`${API}/api/actors/addActor`,this.state.actor)
         .then(()=>{
             document.location.reload();
         })

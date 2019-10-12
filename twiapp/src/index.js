@@ -12,11 +12,10 @@ const TwiReducer=combineReducers({
 MovieReducer
 });
 const middleware=[thunk]
-if(process.env.NODE_env !=='Production'){
+if(process.env.NODE_env !=='production'){
     middleware.push(logger);
 }
 const store=createStore(TwiReducer,applyMiddleware(...middleware));
-
 
 ReactDOM.render(
     <Provider  store={store} >

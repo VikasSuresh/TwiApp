@@ -1,8 +1,7 @@
 import React,{ Component } from "react";
 import axios from 'axios';
 import './AddProducer.css'
-
-
+const API=process.env.REACT_APP_API
 class Producers extends Component{
     state={
         producer:{}
@@ -22,7 +21,7 @@ class Producers extends Component{
     }
     submit(e){
         e.preventDefault();        
-        axios.post('/api/producers/addProducer',this.state.producer)
+        axios.post(`${API}/api/producers/addProducer`,this.state.producer)
         .then(()=>{
             document.location.reload();
         })

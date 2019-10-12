@@ -10,6 +10,7 @@ import Axios from "axios";
 import MovieRender from "../../components/Movie/Movie";
 import ModalMovie from "../../components/Movie/MovieModal";
 import { fileUpload } from "../../fileUpload";
+const API=process.env.REACT_APP_API
 
 class Movie extends Component{
     state={
@@ -53,7 +54,7 @@ class Movie extends Component{
         }
     }            
     Del(){
-        $.ajax('/api/delete',
+        $.ajax(`${API}/api/delete`,
         {
             method:'Delete',
             data:{_id:$('#del').val()},
@@ -72,7 +73,7 @@ class Movie extends Component{
         data.append('Producers',$('#producers').val())
         data.append('Poster',$('#Poster-url').val())
             
-        Axios.put('/api/update',data).then(
+        Axios.put(`${API}/api/update`,data).then(
             document.location.reload()
         )           
         

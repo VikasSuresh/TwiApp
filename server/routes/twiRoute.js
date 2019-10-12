@@ -126,7 +126,7 @@ router.delete('/delete',(req,res)=>{
 })
 
 router.get('/search/:name',(req,res)=>{
-    let regex= new RegExp('^'+req.params.name)    
+    let regex= new RegExp('^'+req.params.name,'i')    
     movies.find({Name:regex})
     .then(data=>{
         res.send(data)

@@ -12,8 +12,18 @@ const Bootstrap=(props)=>(
         <form className="form-inline" action='/search' >
             <input className="form-control" type="search" name='Movie' placeholder="Search" aria-label="Search"/>
             <button className="btn btn-outline-success "  type="submit">Search</button>
-        </form>        
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        </form>    
+        <button className='navbar-toggler Login'>
+        <NavLink to='/login'>
+            Login
+        </NavLink>
+        </button>    
+        <button className='navbar-toggler Register'>
+        <NavLink to='/register'>
+            Register
+        </NavLink>
+        </button> 
+        <button className="navbar-toggler" id='toggler' type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span className="navbar-toggler-icon"></span>
         </button>
         

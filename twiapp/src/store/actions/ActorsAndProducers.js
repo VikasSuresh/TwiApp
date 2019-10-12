@@ -1,8 +1,9 @@
 import * as actionTypes from './ActionTypes'
 import  axios from "axios";
+const API=process.env.REACT_APP_API
 export const getActors=()=>{
     return dispatch=>{
-        axios.get('/api/actors')
+        axios.get(`${API}/api/actors`)
             .then(({data})=>{
                 dispatch({
                     type:actionTypes.GET_ALL_ACTORS,
@@ -14,7 +15,7 @@ export const getActors=()=>{
 
 export const getProducers=()=>{
     return dispatch=>{
-        axios.get('/api/producers')
+        axios.get(`${API}/api/producers`)
             .then(({data})=>{
                 dispatch({
                     type:actionTypes.GET_ALL_PRODUCERS,
