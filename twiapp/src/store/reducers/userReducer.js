@@ -39,3 +39,5 @@ const reducer=(state=initialstate,action)=>{
 }
 
 export default reducer;
+
+export const isAuthenticated=(state)=>state.userReducer.isAuthenticated;

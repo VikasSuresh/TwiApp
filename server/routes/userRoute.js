@@ -82,8 +82,7 @@ router.post('/login',(req,res)=>{
         user.findOne({username:username},(err,obj)=>{            
             if(err)throw err;
             if(Boolean(obj)){                
-                bcrypt.compare(password,obj.password,(err,isMatch)=>{
-                    console.log(err,isMatch)
+                bcrypt.compare(password,obj.password,(err,isMatch)=>{                    
                     if (err) return err;
                     if (isMatch) {
                         const token=jwt.sign({
@@ -101,6 +100,17 @@ router.post('/login',(req,res)=>{
         })
     }
 })
+router.post('/validate', async (req, res) => {
+    const { field, value } = req.body;
+    const { error, isUnique } = await checkUserUniqueness(field, value);
+
+    if (isUnique) {
+        res.json({ success: 'success' });
+    } else {
+        res.json({ error });
+    }
+});
+
 
 const checkUserUniqueness=(field,value)=>{
     return{error,isUnique}=user.findOne({[field]:value})
