@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 const Bootstrap=(props)=>(
     <div>
         <div className="jumbotron text-center header">
-            <NavLink to='/'><img src='/img/Twi.jpg'alt='Twiiii' height='50' widht='50'/></NavLink>
+            <NavLink to='/'><img src='https://twiapp.s3.ap-south-1.amazonaws.com/Twi.jpg'alt='Twiiii' height='50' widht='50'/></NavLink>
             <h4>An Website for Moviesssss</h4> 
         </div>
 

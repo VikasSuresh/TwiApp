@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
 import './Movie.css'
 const Movie=(props)=>(
     <div className='container'>
@@ -23,6 +24,7 @@ const Movie=(props)=>(
                 <button className='btn btn-danger btn-md ' id='del' onClick={props.del} 
                 value={props.state.movie._id} >Delete</button>
                 </div>                
+                <NavLink to='/' className='btn btn-primary home'>Home</NavLink>
             </div>        
         </div>
     </div>

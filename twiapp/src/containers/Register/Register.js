@@ -1,9 +1,10 @@
 import React,{Component} from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import *as selectors from "../store/reducers/userReducer";
-import { checkUserUniqueness,signupRequest } from "../store/actions/userActions";
-import InputField from "../components/InputField/InputField";
+import {NavLink, Redirect } from "react-router-dom";
+import *as selectors from "../../store/reducers/userReducer";
+import { checkUserUniqueness,signupRequest } from "../../store/actions/userActions";
+import InputField from "../../components/InputField/InputField";
+import "./Register.css";
 
 const FIELDS = [
     {name: 'name', type: 'text', label: 'Name'},
@@ -25,7 +26,7 @@ class Register extends Component{
     commonValidation = (field, value) => {
         let error = {};
         if (value === '') {
-            error[field] = 'This field is required';
+            error[field] = `The ${field} is required`;
         } else {
             if (field === 'email' && !validateEmail(value)) {
                 error[field] = 'Not a valid Email';
@@ -36,7 +37,8 @@ class Register extends Component{
             } else {
                 error[field] = '';
             }
-        }        
+        }
+        document.getElementById('h4error').innerHTML=error[field];
         return error;
     }
     unique=async({field,value})=>{
@@ -102,11 +104,14 @@ class Register extends Component{
             <div className='container'>
                 <br/>
                 <h3 className="text-center">Join To ADD EDIT DELETE Movies</h3>
-                <div className="col-sm-8">
+                <h4 className="text-center" id='h4error'></h4>
+                <div className="col-sm-8">                    
                     <form onSubmit={this.handleSignup}>
                         { inputFields }
-                        <button className="btn btn-primary">Sign Up</button>
+                        <button className="btn btn-primary">Sign Up</button>                           
+                        <NavLink to='/Login'  className="btn btn-primary navBt">Login</NavLink>
                     </form>
+                    
                 </div>
             </div>
         )        

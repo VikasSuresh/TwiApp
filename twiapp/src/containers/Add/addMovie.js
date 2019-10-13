@@ -66,13 +66,13 @@ class AddMovie extends Component{
                         
                         <div className='carousel-inner'>
                             <div className='carousel-item active'>
-                                <img src='/img/Carousel-1.jpeg' alt='img'  height='25%' />
+                                <img src='https://twiapp.s3.ap-south-1.amazonaws.com/Carousel-1.jpeg' alt='img'  height='25%' />
                             </div>
                             <div className='carousel-item'>
-                                <img src='/img/Carousel-2.jpg' alt='img'  height='25%' />
+                                <img src='https://twiapp.s3.ap-south-1.amazonaws.com/Carousel-2.jpg' alt='img'  height='25%' />
                             </div>
                             <div className='carousel-item'>
-                                <img src='/img/Carousel-3.jpg' alt='img' height='25%' />
+                                <img src='https://twiapp.s3.ap-south-1.amazonaws.com/Carousel-3.jpg' alt='img' height='25%' />
                             </div>
                         </div>
     
