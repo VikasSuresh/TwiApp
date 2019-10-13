@@ -6,10 +6,12 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore,applyMiddleware,combineReducers } from "redux"; 
 import MovieReducer from './store/reducers/MovieReducer'; 
+import userReducer from "./store/reducers/userReducer";
 import logger  from "redux-logger";
 
 const TwiReducer=combineReducers({
-MovieReducer
+MovieReducer,
+userReducer
 });
 const middleware=[thunk]
 if(process.env.NODE_env !=='production'){

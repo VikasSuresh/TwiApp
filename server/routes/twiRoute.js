@@ -1,6 +1,7 @@
 const express = require('express');
 const {MovieValidate,Validate}=require('../validate')
 const {movies,actors,producers}=require('../model/TwiModel');
+const isAuthenticated=require('../middleware/auth')
 
 const router=express.Router(
     {mergeParams:true}
@@ -39,7 +40,7 @@ router.get('/producers/:_id',async(req,res)=>{
     res.send(result);
 })
 
-router.post('/movies/addMovie',async(req,res)=>{                                        
+router.post('/movies/addMovie',isAuthenticated,async(req,res)=>{                                        
     let {error}=MovieValidate(req.body);    
     if(!error){
         // let {Poster}=req.files;    
@@ -59,7 +60,7 @@ router.post('/movies/addMovie',async(req,res)=>{
     }
 });
 
-router.post('/actors/addActor',(req,res)=>{      
+router.post('/actors/addActor',isAuthenticated,(req,res)=>{      
     let {error}=Validate(req.body);    
     if(!error){
         let result =new actors({
@@ -73,7 +74,7 @@ router.post('/actors/addActor',(req,res)=>{
     }
 });
 
-router.post('/producers/addProducer',(req,res)=>{          
+router.post('/producers/addProducer',isAuthenticated,(req,res)=>{          
     let {error}=Validate(req.body);    
     if(!error){
         let result =new producers({
@@ -90,7 +91,7 @@ router.post('/producers/addProducer',(req,res)=>{
 });
 
 
-router.put('/update',(req,res)=>{              
+router.put('/update',isAuthenticated,(req,res)=>{              
     // let  Poster=''    
     // if(req.files!==null){
     //     Poster=req.files.Poster
@@ -121,7 +122,7 @@ router.put('/update',(req,res)=>{
     // }                             
 });
 
-router.delete('/delete',(req,res)=>{    
+router.delete('/delete',isAuthenticated,(req,res)=>{    
     movies.remove({_id:req.body._id}).then(res.send('success')).catch(err=>res.send(err))
 })
 

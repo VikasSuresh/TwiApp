@@ -3,3 +3,5 @@ export const GET_MOVIES_ID='GET_MOVIES_ID';
 export const GET_ALL_ACTORS= 'GET_ALL_ACTORS';
 export const GET_ALL_PRODUCERS= 'GET_ALL_PRODUCERS';
 export const GET_MBON="GET_MBON";
+export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
+export const LOGOUT_USER = 'LOGOUT_USER';

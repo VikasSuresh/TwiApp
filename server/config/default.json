@@ -1,3 +1,4 @@
 {
-    "db": "mongodb://localhost/TwiApp"
+    "db": "mongodb://localhost/TwiApp",
+    "jwtsecret":"jwtsecret"
 }
