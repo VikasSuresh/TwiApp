@@ -19,13 +19,26 @@ export const signupRequest=(userSignupDetails)=>{
 
 export const userLoginRequest=(userLoginDetails)=>{
     return dispatch=>{
-        Axios.post(`${API}/user/login`,userLoginDetails)
-            .then(res=>console.log(res))
+        return Axios.post(`${API}/user/login`,userLoginDetails)
+            .then(({data})=>{
+                if(!data.errors){
+                    const token= data.token;
+                    delete data.token;
+                    localStorage.setItem('jwtToken',token);
+                    dispatch({
+                        type:actionTypes.LOGIN_SUCCESSFUL,
+                        authorizationToken: token,
+                        authenticatedUsername:jwt.decode(token).username
+                    })                  
+                }else{
+                    return data.errors.invalidCredentials;
+                }
+            })
     }
 }
 
 export const userLogoutRequest=()=>{
-    return dispatch=>{
+    return dispatch=>{        
         localStorage.removeItem('jwtToken');        
         dispatch({ type: actionTypes.LOGOUT_USER });
     }

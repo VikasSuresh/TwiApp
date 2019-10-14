@@ -13,19 +13,30 @@ const Bootstrap=(props)=>(
             <input className="form-control" type="search" name='Movie' placeholder="Search" aria-label="Search"/>
             <button className="btn btn-outline-success "  type="submit">Search</button>
         </form>    
-        <button className='navbar-toggler Login'>
-        <NavLink to='/login'>
-            Login
-        </NavLink>
-        </button>    
-        <button className='navbar-toggler Register'>
-        <NavLink to='/register'>
-            Register
-        </NavLink>
-        </button> 
-        <button className="navbar-toggler" id='toggler' type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span className="navbar-toggler-icon"></span>
-        </button>
+        {props.auth===false
+            ?<div>
+                <button className='navbar-toggler Login'id='Login'>        
+                <NavLink to='/login' >
+                    Login
+                </NavLink>
+                </button>
+                <button className='navbar-toggler Register' id='Register'>
+                <NavLink to='/register'>
+                    Register
+                </NavLink>
+                </button>
+            </div>
+            :
+            <div><button className='navbar-toggler Logout'id='Logout'
+                onClick={props.logout}    
+            >        
+                Logout
+            </button>
+            <button className="navbar-toggler" id='toggler' type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span className="navbar-toggler-icon"></span>
+            </button>
+            </div>
+        }                         
         
         <div className="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">

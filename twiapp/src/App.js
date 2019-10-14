@@ -5,7 +5,7 @@ import Home from "./containers/Home/Home";
 import Movie from "./containers/Movie/Movie";
 import Add from "./containers/Add/Add";
 import Search from "./containers/Search"
-import Login from "./containers/Login"
+import Login from "./containers/Login/Login"
 import Register from "./containers/Register/Register"
 class App extends Component{
   render(){    

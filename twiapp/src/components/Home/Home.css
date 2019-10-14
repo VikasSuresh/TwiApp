@@ -24,11 +24,8 @@
     position: absolute;
     right: 100px;
 }
+
 .Register{
     position: absolute;
     right: 0px;
-}
-        
-#toggler{
-    display: none;
 }

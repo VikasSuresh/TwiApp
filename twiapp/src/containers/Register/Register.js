@@ -104,7 +104,7 @@ class Register extends Component{
             <div className='container'>
                 <br/>
                 <h3 className="text-center">Join To ADD EDIT DELETE Movies</h3>
-                <h4 className="text-center" id='h4error'></h4>
+                <h4 className="text-center" id='h4error'> </h4>
                 <div className="col-sm-8">                    
                     <form onSubmit={this.handleSignup}>
                         { inputFields }
