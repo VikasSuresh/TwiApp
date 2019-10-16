@@ -21,7 +21,11 @@ class Producers extends Component{
     }
     submit(e){
         e.preventDefault();        
-        axios.post(`${API}/api/producers/addProducer`,this.state.producer)
+        axios.post(`${API}/api/producers/addProducer`,this.state.producer,{
+            headers:{
+                'authorization':localStorage.getItem('jwtToken')
+            }
+        })
         .then(()=>{
             document.location.reload();
         })

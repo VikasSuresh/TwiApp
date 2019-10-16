@@ -57,6 +57,9 @@ class Movie extends Component{
     Del(){
         $.ajax(`${API}/api/delete`,
         {
+            headers:{
+                'authorization':localStorage.getItem('jwtToken')
+            },
             method:'Delete',
             data:{_id:$('#del').val()},
             complete:function (){
@@ -74,7 +77,11 @@ class Movie extends Component{
         data.append('Producers',$('#producers').val())
         data.append('Poster',$('#Poster-url').val())
             
-        Axios.put(`${API}/api/update`,data).then(
+        Axios.put(`${API}/api/update`,data,{
+            headers:{
+                'authorization':localStorage.getItem('jwtToken')
+            }
+        }).then(
             document.location.reload()
         )           
         

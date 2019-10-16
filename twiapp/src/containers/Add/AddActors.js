@@ -22,7 +22,11 @@ class Actors extends Component{
     }    
     submit(e){
         e.preventDefault();
-        axios.post(`${API}/api/actors/addActor`,this.state.actor)
+        axios.post(`${API}/api/actors/addActor`,this.state.actor,{
+            headers:{
+                'authorization':localStorage.getItem('jwtToken')
+            }
+        })
         .then(()=>{
             document.location.reload();
         })

@@ -29,7 +29,11 @@ export const getAMovie=(movieId)=>{
 
 export const addMovie=(movie)=>{                
     return dispatch=>{
-        axios.post(`${API}/api/movies/addMovie`,movie)
+        axios.post(`${API}/api/movies/addMovie`,movie,{
+            headers:{
+                'authorization':localStorage.getItem('jwtToken')
+            }
+        })
         .catch(err=>console.log(err))                            
     }
 }

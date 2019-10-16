@@ -3,7 +3,7 @@ const config=require('config');
 
 module.exports=isAuthenticated=(req,res,next)=>{
     const authHeader=req.headers['authorization'];    
-    const authToken=authHeader.split(' ')[1]
+    const authToken=authHeader//.split(' ')[1]
     if(authToken){
         jwt.verify(authToken,config.get('jwtsecret'),(err,decoded)=>{
             if(err){
