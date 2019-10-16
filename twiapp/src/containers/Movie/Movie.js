@@ -2,6 +2,7 @@ import React,{ Component } from "react";
 import { connect } from "react-redux";
 import { withRouter} from "react-router-dom";
 import  * as selectors from "../../store/reducers/MovieReducer";
+import {isAuthenticated} from '../../store/reducers/userReducer'
 import { getAMovie } from "../../store/actions/MovieActions";
 import { getActors,getProducers } from "../../store/actions/ActorsAndProducers";
 import $ from'jquery';
@@ -92,7 +93,7 @@ class Movie extends Component{
             // this.state.actors=this.props.actors.filter((a)=>this.props.movie.Actors.includes(a._id))
             // this.state.producers=this.props.producers.filter((a)=>a._id===this.props.movie.Producers)            
             return(<div>                   
-                <MovieRender state={this.state} del={this.Del} />   
+                <MovieRender state={this.state} del={this.Del} auth={this.props.isAuthenticated} />   
                 <ModalMovie props={this.props} state={this.state} save={this.Save} fileHandle={this.fileHandle.bind(this)} />     
                 </div>       
             )}
@@ -114,6 +115,7 @@ const mapStateToProps=(state,{match:{params}})=>{
         id:params.id,
         actors:selectors.getActors(state),
         producers:selectors.getProducers(state),
+        isAuthenticated:isAuthenticated(state)
     }
 }
 

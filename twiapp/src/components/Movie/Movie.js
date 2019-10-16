@@ -19,9 +19,12 @@ const Movie=(props)=>(
                 }</h4>
                 <div className='col-sm-12 btnn'>
                 <button className='btn btn-info btn-md' id='edit' data-toggle="modal"
+                disabled={!props.auth}
                 data-target="#MovieModal"
                 >Edit</button>
-                <button className='btn btn-danger btn-md ' id='del' onClick={props.del} 
+                <button className='btn btn-danger btn-md ' id='del' 
+                disabled={!props.auth}
+                onClick={props.del} 
                 value={props.state.movie._id} >Delete</button>
                 </div>                
                 <NavLink to='/' className='btn btn-primary home'>Home</NavLink>
