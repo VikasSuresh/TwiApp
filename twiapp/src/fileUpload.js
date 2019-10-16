@@ -1,6 +1,7 @@
 function fileUpload(file) {        
+    const API=process.env.REACT_APP_API
     const xhr= new XMLHttpRequest();
-    xhr.open('GET',`/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${file.type}`);
+    xhr.open('GET',`${API}/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${file.type}`);
     xhr.onreadystatechange=()=>{
         if(xhr.readyState===4 && xhr.status===200){
             const response=JSON.parse(xhr.responseText);            
