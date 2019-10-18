@@ -5,6 +5,7 @@ import {getMoviesBasedOnName} from "../store/actions/MovieActions";
 import Show from "../components/Home/Show";
 import HomeRender from "../components/Home/Home";
 import { isAuthenticated } from "../store/reducers/userReducer";
+import { userLogoutRequest } from "../store/actions/userActions";
 
 class Search extends Component{
     state={
@@ -28,7 +29,9 @@ class Search extends Component{
             <Show movie={movie} key={movie._id}/>                          
             ));                
             return(        
-                <HomeRender allMovies={allMovies} auth={this.props.isAuthenticated}/>
+                <HomeRender allMovies={allMovies} 
+                auth={this.props.isAuthenticated}
+                logout={this.props.userLogoutRequest}/>
                 )
         }else{
             allMovies=<div>Loading</div>
@@ -45,7 +48,8 @@ const mapStateToProps=state=>{
 
 const mapStateToDispatch=(dispatch)=>{
     return{
-        getMoviesBasedOnName:(Name)=>dispatch(getMoviesBasedOnName(Name))
+        getMoviesBasedOnName:(Name)=>dispatch(getMoviesBasedOnName(Name)),
+        userLogoutRequest:()=>dispatch(userLogoutRequest())
     }
 }
 
