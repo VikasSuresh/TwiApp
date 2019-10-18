@@ -4,6 +4,7 @@ import {getMBON} from "../store/reducers/MovieReducer";
 import {getMoviesBasedOnName} from "../store/actions/MovieActions";
 import Show from "../components/Home/Show";
 import HomeRender from "../components/Home/Home";
+import { isAuthenticated } from "../store/reducers/userReducer";
 
 class Search extends Component{
     state={
@@ -27,7 +28,7 @@ class Search extends Component{
             <Show movie={movie} key={movie._id}/>                          
             ));                
             return(        
-                <HomeRender allMovies={allMovies}/>
+                <HomeRender allMovies={allMovies} auth={this.props.isAuthenticated}/>
                 )
         }else{
             allMovies=<div>Loading</div>
@@ -37,7 +38,8 @@ class Search extends Component{
 }
 const mapStateToProps=state=>{
     return{
-        movies:getMBON(state)
+        movies:getMBON(state),
+        isAuthenticated:isAuthenticated(state)
     }
 }
 
