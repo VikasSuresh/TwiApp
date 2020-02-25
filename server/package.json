@@ -24,7 +24,7 @@
     "express-fileupload": "^1.1.6",
     "helmet": "^3.21.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.2"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
