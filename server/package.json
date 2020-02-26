@@ -15,10 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
-    "aws-sdk": "^2.625.0",
-    "bcrypt": "^2.0.0",
+    "aws-sdk": "^2.626.0",
+    "bcrypt": "^4.0.0",
     "compression": "^1.7.4",
-    "config": "^2.2.6",
+    "config": "^3.2.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
