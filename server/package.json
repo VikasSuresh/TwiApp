@@ -11,7 +11,7 @@
     "server": "nodemon server.js"
   },
   "keywords": [],
-  "author": "Vikas",
+  "author": "VikasSuresh",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
